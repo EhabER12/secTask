@@ -1,4 +1,5 @@
 # constans
+from urllib.request import urlretrieve
 from pyopenms.Constants import *
 import pyopenms
 from pyopenms import ElementDB, EmpiricalFormula, CoarseIsotopePatternGenerator, FineIsotopePatternGenerator, ResidueDB, \
@@ -337,3 +338,32 @@ f.load("example.fasta", entries)
 print(len(entries))
 for e in entries:
     print(e.identifier, e.sequence)
+ #Task1   
+seq = AASequence.fromString("VAKA")
+seq_formula = seq.getFormula()
+vakaTotalMZ=0
+coarse_isotopes = seq_formula.getIsotopeDistribution( CoarseIsotopePatternGenerator(6) )
+for iso in coarse_isotopes.getContainer():
+    print ("Isotope", iso.getMZ(),)
+    vakaTotalMZ+=iso.getMZ()
+print(vakaTotalMZ)
+########################################################################################
+v = ResidueDB().getResidue("V")
+a = ResidueDB().getResidue("A")
+k = ResidueDB().getResidue("K")
+l=[v,a,k,a]
+subVakaMZ=0;
+for i in l:
+    vf=EmpiricalFormula(v.getFormula().toString()).getIsotopeDistribution(CoarseIsotopePatternGenerator(5))
+    for iso in vf.getContainer():
+        subVakaMZ+=iso.getMZ()
+print(subVakaMZ)
+#Task3
+dig = ProteaseDigestion()
+dig.setEnzyme('Lys-C')
+bsa = "".join([l.strip() for l in fh.readlines()[1:]])
+bsa = AASequence.fromString(bsa)
+result = []
+dig.digest(bsa, result)
+print(result[4].toString())
+len(result)
