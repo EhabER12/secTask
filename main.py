@@ -362,11 +362,11 @@ print(subVakaMZ)
 from pyopenms import *
 from urllib.request import urlretrieve
 gh = "https://raw.githubusercontent.com/OpenMS/pyopenms-extra/master"
-urlretrieve (gh + "/src/data/P02769.fasta", "bsa.fasta")
+urlretrieve (gh + "/src/data/P02769.fasta", "123.fasta")
 
 dig = ProteaseDigestion()
 dig.getEnzymeName() # Trypsin
-bsa = "".join([l.strip() for l in open("bsa.fasta").readlines()[1:]])
+bsa = "".join([l.strip() for l in open("123.fasta").readlines()[1:]])
 bsa = AASequence.fromString(bsa)
 # create all digestion products
 result = []
