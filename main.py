@@ -1,4 +1,5 @@
 # constans
+#ايهاب راشد مسعود
 from urllib.request import urlretrieve
 from pyopenms.Constants import *
 import pyopenms
@@ -359,21 +360,9 @@ for i in l:
         subVakaMZ+=iso.getMZ()
 print(subVakaMZ)
 #Task3
-from pyopenms import *
-from urllib.request import urlretrieve
-gh = "https://raw.githubusercontent.com/OpenMS/pyopenms-extra/master"
-urlretrieve (gh + "/src/data/P02769.fasta", "123.fasta")
 
-dig = ProteaseDigestion()
-dig.getEnzymeName() # Trypsin
-bsa = "".join([l.strip() for l in open("123.fasta").readlines()[1:]])
-bsa = AASequence.fromString(bsa)
-# create all digestion products
-result = []
-dig.digest(bsa, result)
-print(result[4].toString())
-len(result)
-#####################################
+fh = open("gen.txt")
+
 dig = ProteaseDigestion()
 dig.setEnzyme('Lys-C')
 bsa = "".join([l.strip() for l in fh.readlines()[1:]])
