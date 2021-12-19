@@ -1,5 +1,31 @@
-# constans
+#File contains all Tasks
 #ايهاب راشد مسعود
+ #Task1
+  from urllib.request import urlretrieve
+import pyopenms
+from pyopenms import ElementDB, EmpiricalFormula, CoarseIsotopePatternGenerator, FineIsotopePatternGenerator, ResidueDB, \
+    ModificationsDB, RibonucleotideDB, AASequence, Residue, FASTAEntry, FASTAFile  
+seq = AASequence.fromString("VAKA")
+seq_formula = seq.getFormula()
+vakaTotalMZ=0
+coarse_isotopes = seq_formula.getIsotopeDistribution( CoarseIsotopePatternGenerator(6) )
+for iso in coarse_isotopes.getContainer():
+    print ("Isotope", iso.getMZ(),)
+    vakaTotalMZ+=iso.getMZ()
+print(vakaTotalMZ)
+########################################################################################
+v = ResidueDB().getResidue("V")
+a = ResidueDB().getResidue("A")
+k = ResidueDB().getResidue("K")
+l=[v,a,k,a]
+subVakaMZ=0;
+for i in l:
+    vf=EmpiricalFormula(v.getFormula().toString()).getIsotopeDistribution(CoarseIsotopePatternGenerator(5))
+    for iso in vf.getContainer():
+        subVakaMZ+=iso.getMZ()
+print(subVakaMZ)
+###########################################################################################
+# constans
 from pyopenms.Constants import *
 help(pyopenms.Constants)
 print("Avogadro's number :", pyopenms.Constants.AVOGADRO)
@@ -325,26 +351,7 @@ f.load("example.fasta", entries)
 print(len(entries))
 for e in entries:
     print(e.identifier, e.sequence)
- #Task1   
-seq = AASequence.fromString("VAKA")
-seq_formula = seq.getFormula()
-vakaTotalMZ=0
-coarse_isotopes = seq_formula.getIsotopeDistribution( CoarseIsotopePatternGenerator(6) )
-for iso in coarse_isotopes.getContainer():
-    print ("Isotope", iso.getMZ(),)
-    vakaTotalMZ+=iso.getMZ()
-print(vakaTotalMZ)
-########################################################################################
-v = ResidueDB().getResidue("V")
-a = ResidueDB().getResidue("A")
-k = ResidueDB().getResidue("K")
-l=[v,a,k,a]
-subVakaMZ=0;
-for i in l:
-    vf=EmpiricalFormula(v.getFormula().toString()).getIsotopeDistribution(CoarseIsotopePatternGenerator(5))
-    for iso in vf.getContainer():
-        subVakaMZ+=iso.getMZ()
-print(subVakaMZ)
+####################################################################
 #Task3
 fh = open("gen.txt")
 dig = ProteaseDigestion()
